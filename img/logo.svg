@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 257 257" enable-background="new 0 0 257 257" xml:space="preserve">
+<rect x="-224" y="-239.7" display="none" fill="#FFFFFF" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" width="260.8" height="260.8"/>
+<g>
+	<g id="_x32__1_">
+		<g id="bottom_1_">
+			<path id="bottom-base_1_" fill="#FFFFFF" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" d="M174.2,253.5
+				c29.2-1.1,51.5-14.4,61.4-29.1c12.9-19.4,16.1-35.5,17.9-60c0.5-6.8,0.9-38.3-14-63.7c-14.4-24.7-30.6-31.4-33-33.5
+				c-6.2-5.6,12-26,3.3-37.9C200,15.6,156.1-1.1,156.3,3.7c0.1,2.9,17.6,62.5,21.3,66c5.8,5.5,20.9,8.3,36.1,25.3
+				c7.1,7.9,12.1,30,10.6,42.7c-2.3,19.1-10.2,26.5-27.4,30c-12.4,2.5-38.8,7.1-51,14.7c-9.2,5.7-20.6,15.8-25.3,24.6
+				c-15.9,30-68.8,36.8-94.7,21.1c-6-3.6,11.7,16.7,21.9,20c16.2,5.2,30.7,5.3,48.7,5.3H174.2z"/>
+			<path fill="#ACACAC" d="M212.5,215.6c0,8.1-6.8,14.6-15.1,14.6h-6.4c-8.4,0-15.1-6.5-15.1-14.6v-12.8c0-8.1,6.8-14.6,15.1-14.6
+				h6.4c8.4,0,15.1,6.5,15.1,14.6V215.6z"/>
+			<ellipse fill="#FFFFFF" cx="188.1" cy="198.7" rx="3.6" ry="3.5"/>
+		</g>
+		<g id="top_1_">
+			<path id="top-base_1_" fill="#0B7ABF" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" d="M12.2,135.9
+				c8.5-17.9,29-29.3,49.3-29.3h114.9c5.8,0,10.8-3.6,12-5.9c6.8-12.4-2.8-22.8-7.4-20.1c-8.2,4.7-17.6,15.4-30.8,11.6
+				c-6.4-1.9-34.1-27.5-37-33.6c-2.9-6.3,29.7-1.9,51.5-1.6c4.2,0.1-9.3-34-10.5-48.5C153.9,4.7,156.4,3,157,3
+				c1.9,0.1,27.2,15.9,35.8,21.8c3.9,2.7,10.7,8.7,8.7,18.2c-0.8,3.9-3,10-5.1,16c-1.5,4.5-2,10.8,1,13.8c4.5,4.5,6.8,6.9,14.5,14
+				c9.8,9.1,16,26.8,13.8,55.3c-1.3,17.2-21.7,25.3-30.9,26.6c-12.5,1.7-35.8,6.1-48,13.7c-9.2,5.7-21.7,15.8-26.3,24.6
+				c-15.9,30.8-68.8,36.8-94.7,21.1c-10.5-6.4-23.2-20.2-22.3-53.2C3.9,163.3,6.1,148.6,12.2,135.9z"/>
+			<circle id="eye-rim_5_" fill="#FFFFFF" cx="83.4" cy="184.9" r="20.3"/>
+			<circle id="eye_5_" fill="#2A353C" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" cx="83.4" cy="184.9" r="13.7"/>
+			
+				<circle id="eye-highlight_5_" fill="#FFFFFF" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" cx="87.7" cy="179.3" r="6.4"/>
+			<circle id="port-big_4_" fill="#FDB515" cx="147.1" cy="136.9" r="10"/>
+			<circle id="port-small_6_" fill="#FDB515" cx="170.5" cy="135.4" r="7.7"/>
+			<circle id="port-small_5_" fill="#FDB515" cx="189.5" cy="133.8" r="5.4"/>
+		</g>
+		<g id="spout_1_" display="none">
+			<polygon display="inline" fill="#F5F6F6" stroke="#2A353C" stroke-width="5" stroke-miterlimit="10" points="87.3,125.4 
+				49.8,87.9 87.3,104.2 124.8,87.9 			"/>
+			<polyline display="inline" fill="#0B7ABF" points="87.3,122.4 60.9,95.4 87.3,106.9 			"/>
+		</g>
+	</g>
+	<path fill="#FFFFFF" d="M23.6,141.6c-0.9,1.7-4,7.1-2.3,7.9c1.4,0.7,7.5,1.6,8.5-1.8c1.8-5.9,11.1-8.6,13.3-9.2
+		c0.6-0.2,1.2-0.4,1.7-0.6c2.7-1.2,9.5-8.9,1.4-15c-1.8-1.3-6.7,2-9.6,3.7C34.3,128.2,27.4,134.7,23.6,141.6z"/>
+	<circle fill="#FFFFFF" cx="20.9" cy="157.2" r="3.2"/>
+</g>
+</svg>

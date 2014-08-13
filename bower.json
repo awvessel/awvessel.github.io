@@ -1,0 +1,19 @@
+{
+  "name": "Vessel Public",
+  "version": "0.1.0",
+  "authors": [
+    "Gavin M. Roy <gavinr@aweber.com>"
+  ],
+  "license": "BSD",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0"
+  }
+}

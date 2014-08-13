@@ -1,0 +1,120 @@
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+h1, h2 {
+  text-transform: uppercase;
+}
+
+
+.navbar {
+    margin: 0;
+}
+
+header {
+  p {
+    color: @brand-primary;
+    margin: 1em 0;
+  }
+  .logo {
+    width: 204px;
+    height: 204px;
+  }
+  .title {
+    text-align: center;
+    font-weight: 800;
+  }
+  margin: 0;
+  padding: 3em 0;
+
+  .requirements {
+    color: @gray-light;
+    font-size: 12pt;
+  }
+}
+
+.statement {
+  color: @brand-secondary;
+  background: @gray-dark;
+  text-align: center;
+  font-weight: 200;
+  letter-spacing: .1em;
+  font-size: 24pt;
+}
+
+.primary {
+  background: @brand-primary;
+  color: #fff;
+  h1, h2, h3, h4, h5 {
+    color: @brand-secondary;
+  }
+  a {
+    color: #fff;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 1em;
+}
+
+.container-fluid {
+
+  .container {
+    margin: 0 auto;
+    padding: 0 1em;
+  }
+
+  .statement {
+    text-align: center;
+  }
+}
+
+.band {
+  padding: 1em 0;
+  letter-spacing: .05em;
+  font-weight: 200;
+}
+
+
+footer {
+  background: @gray-dark;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 14pt;
+}
+
+.carousel {
+  padding-bottom: 40px;
+}
+
+.carousel-control {
+  &.left, &.right {
+    margin: -2em;
+    background: none;
+  }
+  .opacity(0.25);
+  &:hover {
+    color: @brand-secondary;
+    .opacity(1);
+  }
+}
+
+.carousel-indicators {
+  margin-bottom: -20px;
+}
+
+.carousel-caption {
+  font-size: 12pt;
+  padding: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  position: relative;
+  margin: 1em 3em 0;
+  text-align: left;
+}
