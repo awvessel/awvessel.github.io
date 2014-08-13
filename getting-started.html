@@ -48,7 +48,7 @@
 
         <p>Enter the URL into the box and click Save URL.</p>
 
-        <p>When you save the URL, the repository will be cloned to a newly created /Users/[USERNAME]/.vessel/ directory. Each subsequent time you start Vessel, the repository will be updated to reflect the current state of the master branch for the manifest.</p>
+        <p>When you save the URL, the repository will be cloned to a newly created <samp>/Users/[USERNAME]/.vessel/</samp> directory. Each subsequent time you start Vessel, the repository will be updated to reflect the current state of the master branch for the manifest.</p>
 
         <h4>The Environment Directory</h4>
 
@@ -82,10 +82,10 @@
         <p>Once the process has completed, the status dialog will go away and the green <em>Power On</em> button will be replaced with an orange <em>Power Off</em> button. If you'd like to see the output from Vagrant or the various things the application has done, you can navigate to the <em>Logs</em> tab.</p>
 
         <h4>Working in your Virtual Environment</h4>
-        The behavior of each application or service in the virtual environment will differ based upon how the docker container is structured. By default, the goal is to have the selected services up and running in the environment. If you navigate to the <em>Overview</em> tab you can see the containers that are running and the ports they are exposing to your local operating system.</p>
+        <p>The behavior of each application or service in the virtual environment will differ based upon how the docker container is structured. By default, the goal is to have the selected services up and running in the environment. If you navigate to the <em>Overview</em> tab you can see the containers that are running and the ports they are exposing to your local operating system.</p>
 
-        For example, if you wanted to test the OCD service running in the Virtual Environment, we could point our web browser to <kbd>http://192.168.50.101:8021</kbd>.
-        Each container that a service is running in has its IP address listed in the over tab so that you can SSH directly into the container if required. To do so, you must first SSH into the Virtual Machine using the vagrant ssh command in the environment directory:</p>
+        <p>For example, if you wanted to test the OCD service running in the Virtual Environment, we could point our web browser to <kbd>http://192.168.50.101:8021</kbd>.</p>
+        <p>Each container that a service is running in has its IP address listed in the over tab so that you can SSH directly into the container if required. To do so, you must first SSH into the Virtual Machine using the vagrant ssh command in the environment directory:</p>
         <samp>
           s826:ocd gavinr$ vagrant ssh<br>
           CoreOS (beta)<br>
@@ -105,8 +105,9 @@
 
         <p>The environment created by Vessel is fairly opinionated about how things are created and includes service discovery provided by <em>Consul</em>. This is not a Vessel specific implementation, but rather a result of the manifest file that is used. Should you want to use Vessel for your own projects or for projects that are not in the Manifest, you can create your own global or local Manifest file that has the containers and repositories that are appropriate for your project. For more information on the base environment and service discovery aspects of the AWeber development environment, check out the Development Environment documentation.</p>
 
-      <h4>Summary</h4>
-      <p>If you&rsquo;ve made it this far without any issues, you&rsquo;ve successfully created a virtual environment using Vessel. You should have services running and should be able to interact with them. </p>
+        <h4>Summary</h4>
+        <p>If you&rsquo;ve made it this far without any issues, you&rsquo;ve successfully created a virtual environment using Vessel. You should have services running and should be able to interact with them. </p>
+      </div>
     </div>
     <footer>
       Made with <i class="glyphicon glyphicon-heart"></i> at <a href="http://aweber.com">AWeber Communications</a>
