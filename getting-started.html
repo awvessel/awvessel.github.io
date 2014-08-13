@@ -38,21 +38,24 @@
 
         <p>When you run Vessel for the first time, you will be prompted to enter a git URL for the manifest repository:</p>
 
-        <p>SCREENSHOT</p>
+        <img src="img/Screenshots/Guide/1-missing-manifest.png" alt="Missing manifest dialog box" class="img-responsive">
 
         <p>The manifest repository defines the settings for Vagrant and all of the Docker containers available to your development environment.</p>
 
         <p>The repository URL for the public AWeber Vessel manaifest repository is:</p>
 
-        <kbd>https://github.com/awvessel/manifest.git</kbd>
+        <p><a href="https://github.com/awvessel/manifest.git"><kbd>https://github.com/awvessel/manifest.git</kbd></a></p>
 
-        <p>Enter the URL into the box and click Save URL.</p>
+        <p>Enter the URL into the box and click <em>Save URL</em>.</p>
 
         <p>When you save the URL, the repository will be cloned to a newly created <samp>/Users/[USERNAME]/.vessel/</samp> directory. Each subsequent time you start Vessel, the repository will be updated to reflect the current state of the master branch for the manifest.</p>
 
         <h4>The Environment Directory</h4>
 
-        <p>One key Vessel concept is the environment directory. This is a directory that will contain not only the Vagrant and CoreOS configuration to start your virtual environment, but it will also contain sub-directories with source-code and scripts available to the virtual environment. When you are first starting a new environment, you should create an empty directory and let Vessel setup and manage the contents of the directory. Don't worry about cloning the git repositories you intend to work on, Vessel will do this for you.</p>
+        <p>One key Vessel concept is the environment directory. This is a directory that will contain not only the Vagrant and CoreOS configuration to start your virtual environment, but it will also contain sub-directories with source-code and scripts available to the virtual environment.</p>
+        <p>When you are first starting a new environment, you should create an empty directory and let Vessel setup and manage the contents of the directory. Don't worry about cloning the git repositories you intend to work on, Vessel will do this for you.</p>
+
+        <img src="img/Screenshots/Guide/2-environment-directory.png" alt="Environment directory dialog box" class="img-responsive">
 
         <p>Once you have created and selected a directory/folder for the development environment, press <em>Open</em> to load the environment.</p>
 
