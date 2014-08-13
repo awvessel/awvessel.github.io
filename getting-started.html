@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vessel &ndash; Getting Started</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/vessel.ico">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">VESSEL</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li class="active"><a href="getting-started.html">Getting Started</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="band">
+      <div class="container">
+        <h1>Getting Started</h1>
+
+        <h4>Running Vessel for the First Time</h4>
+
+        <p>When you run Vessel for the first time, you will be prompted to enter a git URL for the manifest repository:</p>
+
+        <p>SCREENSHOT</p>
+
+        <p>The manifest repository defines the settings for Vagrant and all of the Docker containers available to your development environment.</p>
+
+        <p>The repository URL for the public AWeber Vessel manaifest repository is:</p>
+
+        <kbd>https://github.com/awvessel/manifest.git</kbd>
+
+        <p>Enter the URL into the box and click Save URL.</p>
+
+        <p>When you save the URL, the repository will be cloned to a newly created /Users/[USERNAME]/.vessel/ directory. Each subsequent time you start Vessel, the repository will be updated to reflect the current state of the master branch for the manifest.</p>
+
+        <h4>The Environment Directory</h4>
+
+        <p>One key Vessel concept is the environment directory. This is a directory that will contain not only the Vagrant and CoreOS configuration to start your virtual environment, but it will also contain sub-directories with source-code and scripts available to the virtual environment. When you are first starting a new environment, you should create an empty directory and let Vessel setup and manage the contents of the directory. Don't worry about cloning the git repositories you intend to work on, Vessel will do this for you.</p>
+
+        <p>Once you have created and selected a directory/folder for the development environment, press <em>Open</em> to load the environment.</p>
+
+        <h4>Selecting Containers</h4>
+
+        <p>When a new environment directory is loaded for the first time, Vessel will start on the <em>Containers</em> tab. This is the tab where you will select the applications and low-level services you need in your development environment.</p>
+
+        <p>When you select an application on the left side of the <em>Containers</em> tab, such as the OCD application, you should see other low-level dependency services selected as well.</p>
+
+        <p>In addition to selecting the dependency services, the blue <em>Build Environment</em> button will be enabled at the bottom of the window.
+        If you intend to work on the source code for a particular application, once the container has been enabled, the git button will become available. When gray or disabled, the source code for the project will not be cloned. However, once you click the button, it should turn green, indicating that the source for that project will be made available in the environment's source directory and inside the container.</p>
+
+        <p>If an environment has multiple branches in its git repository, a drop-down box will be presented to the right of the application/service name that allows you to select which branch you would like to work out of. By default, the master branch will be selected when cloning repositories.</p>
+
+        <p>In most circumstances, once you have selected the desired services and branches, you can build the environment. Doing so will create the required configuration and clone the git repositories for the environment. Vessel will attempt to clone any enabled git repositories in parallel to reduce the time required to get started:</p>
+
+        <p>When the environment is built, a local copy of the manifest file will be stored in the environment directory. This file will save the state of your configuration and all of the available options at the time when the environment was first created. If new containers become available in the global manifest repository after you create your environment, you can reset the configuration by removing the <kbd>.vessel.yaml</kbd> file in the environment directory.</p>
+
+        <h4>Starting the Virtual Environment</h4>
+
+        <p>Once the environment has been built, the green <em>Power On</em> button in the bottom right corner will be enabled.</p>
+
+        <p>As Vagrant uses sudo to edit the <kbd>/etc/exports</kbd> file in order to provide shared folders between your operating system and the Virtual Machine, you will need to enter your password. While your password is cached internally in the Vessel application, it is never written to disk, nor is it logged when any commands are issued. Vessel will directly interact with the sudo command to validate your password prior to starting any Vagrant process. Enter your password and then press the <em>Authenticate</em> button. If you have recently used sudo to gain root access in your operating system, the Authentication Required dialog will not be presented.</p>
+
+        <p>Once authenticated, the process of starting the Virtual Machine and starting the Docker containers will begin. The duration of the startup is impacted by a few factors: the speed of your connectivity to the docker server and the number of services selected. You will be presented with the status dialog so you can track the progress:</p>
+
+        <p>Once the process has completed, the status dialog will go away and the green <em>Power On</em> button will be replaced with an orange <em>Power Off</em> button. If you'd like to see the output from Vagrant or the various things the application has done, you can navigate to the <em>Logs</em> tab.</p>
+
+        <h4>Working in your Virtual Environment</h4>
+        The behavior of each application or service in the virtual environment will differ based upon how the docker container is structured. By default, the goal is to have the selected services up and running in the environment. If you navigate to the <em>Overview</em> tab you can see the containers that are running and the ports they are exposing to your local operating system.</p>
+
+        For example, if you wanted to test the OCD service running in the Virtual Environment, we could point our web browser to <kbd>http://192.168.50.101:8021</kbd>.
+        Each container that a service is running in has its IP address listed in the over tab so that you can SSH directly into the container if required. To do so, you must first SSH into the Virtual Machine using the vagrant ssh command in the environment directory:</p>
+        <samp>
+          s826:ocd gavinr$ vagrant ssh<br>
+          CoreOS (beta)<br>
+          core@awdev ~ $<br>
+        </samp>
+
+        <p>From there, if you wanted to log into the OCD container, you would SSH to the <var>172.17.0.5</var> IP address:</p>
+
+        <samp>
+          core@awdev ~ $ ssh 172.17.0.5<br>
+          Welcome to Ubuntu 12.04.4 LTS (GNU/Linux 3.8.0-35-generic x86_64)<br>
+          <br>
+           * Documentation:  https://help.ubuntu.com/<br>
+           <br>
+          root@32f815fea551:~#<br>
+        </samp>
+
+        <p>The environment created by Vessel is fairly opinionated about how things are created and includes service discovery provided by <em>Consul</em>. This is not a Vessel specific implementation, but rather a result of the manifest file that is used. Should you want to use Vessel for your own projects or for projects that are not in the Manifest, you can create your own global or local Manifest file that has the containers and repositories that are appropriate for your project. For more information on the base environment and service discovery aspects of the AWeber development environment, check out the Development Environment documentation.</p>
+
+      <h4>Summary</h4>
+      <p>If you&rsquo;ve made it this far without any issues, you&rsquo;ve successfully created a virtual environment using Vessel. You should have services running and should be able to interact with them. </p>
+    </div>
+    <footer>
+      Made with <i class="glyphicon glyphicon-heart"></i> at <a href="http://aweber.com">AWeber Communications</a>
+    </footer>
+    <a href="https://github.com/awvessel/vessel"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    <script src="http://use.edgefonts.net/source-sans-pro.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    </script>
+  </body>
+</html>
