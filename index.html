@@ -149,8 +149,12 @@
           <p>While it's technically possible, there are not currently any builds available for these platforms. If you&rsquo;d like to help with Linux or Windows support for vessel, please get in touch!</p>
         </li>
         <li>
-          <strong>Do I have to use Consul in my containers?</strong>
+          <strong>Do I have to use <em>Consul</em> in my containers?</strong>
           <p><a href="http://www.consul.io/" target="consul">Consul</a> is used to support service discovery within the docker containers and across Virtual Machines. You&rsquo;re free to use whatever discovery service you&rsquo;d like, but out of the box, we have chosen to use Consul.</p>
+        </li>
+        <li>
+          <strong>What about <em>etcd</em> instead of <em>Consul</em>?</strong>
+          <p>Vessel ensures that <em>etcd</em> is started and given a unique token for every fresh virtual machine instance. For the boot process, <em>etcd</em> is used to coordinate consul bootstrapping across nodes. There should be no problem with your containers using the same <em>etcd</em> instance.</p>
         </li>
         <li>
           <strong>What is Vessel written in?</strong>
