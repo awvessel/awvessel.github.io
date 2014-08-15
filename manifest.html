@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vessel &ndash; Manifest File Specification</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="ico/vessel.ico">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">VESSEL</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="docs.html">Documentation</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="getting-started.html">Getting Started</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="col-sm-10 col-sm-offset-1">
+        <h1>Manifest File Specification</h1>
+
+        <p>The Vessel manifest file is stored in <a href="http://www.yaml.org/spec/1.2/spec.html">YAML</a> format and is comprised of four distinct areas: docker, containers, ssh and vagrant. The following document details the available attributes in each section and their intended use. In addition to the attribute level details for each section, an example manifest is located at the bottom of the document.</p>
+
+        <h2>Sections</h2>
+        <p>Each section is a top-level attribute in the YAML file. The format of each section varies with the type of information that they contain.</p>
+
+        <h3 id="containers">containers</h3>
+        <p>The containers section is a list of Docker container definitions. The following attribute table defines the attributes of each object in the containers list.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Required</th>
+              <th>Default</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>name</td>
+              <td>The name of the container</td>
+              <td class="text-center">Yes</td>
+              <td></td>
+              <td><code>MyApp</code></td>
+            </tr>
+            <tr>
+              <td>category</td>
+              <td>A category name for the container. Containers designated as <code>Low-Level</code> will show up on the right side list, while all others will show up on the left.</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>API</code></td>
+            </tr>
+            <tr>
+              <td>cpuShares</td>
+              <td>Specify the docker CPU shares value</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>dependencies</td>
+              <td>A list of containers that this container is dependent upon. Specifying dependencies will ensure the dependency is started before this container. If a dependency exposes volumes, this container will automatically use them.</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><pre>- consul
+  - memcached
+  - postgresql</pre></td>
+            </tr>
+            <tr>
+              <td>dns</td>
+              <td>Override the default DNS with a specific DNS server for the container</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>8.8.4.4</code></td>
+            </tr>
+            <tr>
+              <td>enabled</td>
+              <td>Specify that the container should be enabled on load of the application</td>
+              <td class="text-center">No</td>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td>env</td>
+              <td>A mapping of key/value pairs to pass in as environment values</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td>
+                <pre>foo: barbaz: qux&nbsp;</pre>
+              </td>
+            </tr>
+            <tr>
+              <td>icon</td>
+              <td>The icon to use for the container. See the Container Icons document for available icons.</td>
+              <td class="text-center">No</td>
+              <td><code>cube</code></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>image</td>
+              <td>The docker image to use. Note the <code>&lt;server&gt;</code> macro replaces the <code>&lt;server&gt;</code> value with the value defined in the docker attributes.</td>
+              <td class="text-center">Yes</td>
+              <td></td>
+              <td><code>&lt;server&gt;/aweber/redis</code></td>
+            </tr>
+            <tr>
+              <td>memory</td>
+              <td>Limit the container to using N bytes of memory</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>209715200</code></td>
+            </tr>
+            <tr>
+              <td>memorySwap</td>
+              <td>Limit the container to using N bytes of sawp</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>209715200</code></td>
+            </tr>
+            <tr>
+              <td>path</td>
+              <td>An optional path to the command that should be run when starting the container</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>/usr/bin/supervisord</code></td>
+            </tr>
+            <tr>
+              <td>ports</td>
+              <td>A list of ports to make available from the docker container. This can either be a list of integer values or a list of complex <a href="#ports">Port</a> objects.</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td>
+                <pre>- 8080
+  - 8081</pre>
+                <p>or</p>
+                <pre>- guest: 8080
+    host: 8080
+  - guest: 8081
+    host: 8081</pre>
+              </td>
+            </tr>
+            <tr>
+              <td>repository</td>
+              <td>Defines the git repository for a project/container. See the <a href="#repository">Repository</a> definition.</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><pre>url: git@github.com:awvessel/vessel.git
+  branch: master
+
+              </pre></td>
+            </tr>
+            <tr>
+              <td>required</td>
+              <td>Indicates the container is required for all other containers in the manifest unless the container specifies the standalone flag.</td>
+              <td class="text-center">No</td>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td>standalone</td>
+              <td>Indicates the container should ignore any required containers as dependencies.</td>
+              <td></td>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td>tags</td>
+              <td>A list of keywords to tag the container with that can be used for searching containers</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td>
+                <pre>- database
+  - postgresql</pre>
+              </td>
+            </tr>
+            <tr>
+              <td>user</td>
+              <td>A user to run the container as</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>www-data</code></td>
+            </tr>
+            <tr>
+              <td>visible</td>
+              <td>Indicates the container should not be visible in the UI but still processed as a dependency of global requirement.</td>
+              <td class="text-center">No</td>
+              <td><code>true</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td>volumes</td>
+              <td>A list of paths to make available from this container to other containers.</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td>
+                <pre>- /var/log/foo
+  - /etc/bar</pre>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 id="ports">Ports Definition</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th class="text-center">Required</th>
+              <th class="text-center">Default</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>guest</td>
+              <td>The port to expose from the docker container</td>
+              <td class="text-center">Yes</td>
+              <td></td>
+              <td>8080</td>
+            </tr>
+            <tr>
+              <td>guest_ip</td>
+              <td>Bind to a specific guest IP address</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>0.0.0.0</code></td>
+            </tr>
+            <tr>
+              <td>host</td>
+              <td>The port to expose on the host</td>
+              <td class="text-center">Yes</td>
+              <td></td>
+              <td><code>8080</code></td>
+            </tr>
+            <tr>
+              <td>host_ip</td>
+              <td>Bind to a specific host IP address</td>
+              <td class="text-center">No</td>
+              <td></td>
+              <td><code>0.0.0.0</code></td>
+            </tr>
+            <tr>
+              <td>protocol</td>
+              <td>The socket type for the port (tcp, udp)</td>
+              <td class="text-center">No</td>
+              <td class="text-center"><code>tcp</code></td>
+              <td><code>tcp</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 id="repository">Repository</h4>
+        <p>An optional git repository to clone for the container that will be made available in the container in <code>/opt/source</code>.</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th class="text-center">Required</th>
+              <th class="text-center">Default</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>url</td>
+              <td>The URL of the repository to clone</td>
+              <td class="text-center">Yes</td>
+              <td></td>
+              <td><code>https://github.com/awvessel/vessel.git</code></td>
+            </tr>
+            <tr>
+              <td>branch</td>
+              <td>The default branch to select for the clone</td>
+              <td class="text-center">No</td>
+              <td>master</td>
+              <td>master</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3 id="docker">docker</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>server</td>
+              <td>The docker server to use for replacing the server macro in the container image value</td>
+              <td><code>docker.foo.com</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="ssh">ssh</h3>
+        <p>All SSH attributes are required</p>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>key/private</td>
+              <td>The SSH private key to use for access to docker containers</td>
+              <td><code>ssh-rsa AAAAB ... 0rpLaSn core@awdev</code></td>
+            </tr>
+            <tr>
+              <td>key/public</td>
+              <td>The SSH public key to use for access to docker containers</td>
+              <td>
+                <pre>-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAusS3LbsL/fhSP5 ...
+-----END RSA PRIVATE KEY-----</pre></td>
+            </tr>
+          </tbody>
+        </table>
+
+          <h3 id="#vagrant">Vagrant</h3>
+          <p>All vagrant attributes are required</p>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>box</td>
+                <td>The name of the box that will be used</td>
+                <td><code>coreos-beta</code></td>
+              </tr>
+              <tr>
+                <td>cpu_count</td>
+                <td>The number of CPUs to make available in the VM</td>
+                <td><code>2</code></td>
+              </tr>
+              <tr>
+                <td>ram</td>
+                <td>The amount of RAM in KB to make available in the VM</td>
+                <td><code>2048</code></td>
+              </tr>
+              <tr>
+                <td>hostname</td>
+                <td>The hostname of the VM</td>
+                <td><code>awdev</code></td>
+              </tr>
+              <tr>
+                <td>network/type</td>
+                <td>The type of network (one of public, private)</td>
+                <td><code>private</code></td>
+              </tr>
+              <tr>
+                <td>network/ip</td>
+                <td>The IP address to use for the VM</td>
+                <td><code>192.168.1.10</code></td>
+              </tr>
+              <tr>
+                <td>providers</td>
+                <td>A list of provider box definitions</td>
+                <td>See <a href="#ManifestSpecification-provider">Provider Definition</a></td>
+              </tr>
+              <tr>
+                <td>syned_folders</td>
+                <td>A list of synced folders to make available to the VM</td>
+                <td>See <a href="#ManifestSpecification-syncedfolders">Synced Folders Definition</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Provider Definition</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+                <th class="text-center">Required</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>The provider name</td>
+                <td class="text-center">Yes</td>
+                <td><code>virtualbox</code></td>
+              </tr>
+              <tr>
+                <td>min_version</td>
+                <td>The minimum box version</td>
+                <td class="text-center">No</td>
+                <td><code>324.1.0</code></td>
+              </tr>
+              <tr>
+                <td>url</td>
+                <td>The URL to the box or box manifest</td>
+                <td class="text-center">Yes</td>
+                <td><a href="http://storage.core-os.net/coreos/amd64-usr/beta/coreos_production_vagrant.json" class="external-link" rel="nofollow">http://storage.core-os.net/coreos/amd64-usr/beta/coreos_production_vagrant.json</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Synced Folder Definition</h4>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+                <th class="text-center">Required</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>The folder/directory name in the environment directory</td>
+                <td class="text-center">Yes</td>
+                <td><code>source</code></td>
+              </tr>
+              <tr>
+                <td>mount</td>
+                <td>The VM mount point path</td>
+                <td class="text-center">Yes</td>
+                <td><code>/mnt/source</code></td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>Optional NFS options</td>
+                <td class="text-center">No</td>
+                <td><code>nolock,vers=3,udp</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 id="example">Example</h3>
+          <p>The following is an example of a Vessel manifest file:</p>
+          <pre>%YAML 1.2
+---
+containers:
+
+  - name: mongodb_data
+    image: aweber/mongodata
+    standalone: true
+    visible: false
+    volumes:
+      - /var/lib/mongodb
+
+  - name: mysql_data
+    image: aweber/mysqldata
+    standalone: true
+    visible: false
+    volumes:
+      - /var/lib/mysql
+
+  - name: pgsql_data
+    image: aweber/pgdata
+    standalone: true
+    visible: false
+    volumes:
+      - /var/lib/postgresql
+
+  - name: redis_data
+    image: aweber/redisdata
+    standalone: true
+    visible: false
+    volumes:
+      - /var/lib/redis
+
+  - name: Couchbase
+    category: Low-Level
+    icon: couchbase
+    image: aweber/couchbase
+    ports:
+      - 8091
+      - 8092
+      - 11210
+      - 11211
+
+  - name: Elasticsearch
+    category: Low-Level
+    icon: elasticsearch
+    image: aweber/elasticsearch
+    ports:
+      - 9200
+      - 9300
+
+  - name: Ghost
+    category: Application
+    icon: nodejs
+    image: aweber/ghost
+    ports:
+      - 2368
+    repository:
+      url: https://github.com/TryGhost/Ghost.git
+
+  - name: Grafana
+    category: Application
+    dependencies:
+      - Elasticsearch
+      - Graphite
+    icon: fa-dashboard
+    image: aweber/grafana
+    ports:
+      - 9202
+
+  - name: Graphite
+    category: Low-Level
+    icon: fa-bar-chart-o
+    image: aweber/graphite
+    ports:
+      - 2003
+      - 2004
+      - 2005
+
+  - name: InfluxDB
+    category: Low-Level
+    image: aweber/influxdb
+    ports:
+      - 8083
+      - 8086
+      - 8090
+      - 8099
+
+  - name: Kibana
+    category: Application
+    dependencies:
+      - Elasticsearch
+    icon: elasticsearch
+    image: aweber/elasticsearch
+    ports:
+      - 9201
+
+  - name: Memcached
+    category: Low-Level
+    icon: memcached
+    image: aweber/memcached
+    ports:
+      - 11211
+
+  - name: MongoDB
+    category: Low-Level
+    icon: mongodb
+    image: aweber/mongodb
+    dependencies:
+      - mongodb_data
+    ports:
+      - 27017
+
+  - name: MySQL
+    category: Low-Level
+    icon: mysql
+    image: aweber/mysql
+    dependencies:
+      - mysql_data
+    ports:
+      - 3306
+
+  - name: PostgreSQL
+    category: Low-Level
+    dependencies:
+      - pgsql_data
+    icon: postgresql
+    image: aweber/postgresql
+    ports:
+      - 5432
+
+  - name: RabbitMQ
+    category: Low-Level
+    icon: rabbitmq
+    image: aweber/rabbitmq
+    ports:
+      - 1883
+      - 4369
+      - 5672
+      - 15672
+      - 25672
+
+  - name: Redis
+    category: Low-Level
+    icon: redis
+    image: aweber/redis
+    dependencies:
+      - redis_data
+    ports:
+      - 6379
+
+  - name: StatsD
+    category: Low-Level
+    icon: nodejs
+    image: aweber/statsd
+    ports:
+      - guest: 8125
+        host: 8125
+        protocol: udp
+      - guest: 8126
+        host: 8126
+        protocol: tcp
+
+docker:
+  server: registry.hub.docker.com
+
+ssh:
+  key:
+    public:
+      ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHpYVjhNAcP46zDXCaFQkahbSxfHXu34XSrXaevrzOwIiU+Lvm505lDQNtjHNniAK5uyBHR20n1LDLhFINbNQeTr0JL4LF1cQf4xigk1u4Cowy94OfcQOU1tBKUHI23qsTRV9wzzFrdiBUZ/B6ACsIZLNQLx6ncMTAZv/QjUh1YuJUAmTJm79la3sAjJkhvnCs7g5w6GXMLYcXDI5Iz/WcN9GI+YyK5TNWknEuk+QfRbp9u/Q95EPW89KemVuuavxN2J/dJJzhEDQpFSTFgRixULhK4O9yHEK/enx8GAIapMqSDXmilnAZsqlyrYnGwuNoc2/BXBUhCic+JZ8i9cAz vessel@public
+    private: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEAx6WFY4TQHD+Osw1wmhUJGoW0sXx17t+F0q12nr68zsCIlPi7
+      5udOZQ0DbYxzZ4gCubsgR0dtJ9Swy4RSDWzUHk69CS+CxdXEH+MYoJNbuAqMMveD
+      n3EDlNbQSlByNt6rE0VfcM8xa3YgVGfwegArCGSzUC8ep3DEwGb/0I1IdWLiVAJk
+      yZu/ZWt7AIyZIb5wrO4OcOhlzC2HFwyOSM/1nDfRiPmMiuUzVpJxLpPkH0W6fbv0
+      PeRD1vPSnplbrmr8Tdif3SSc4RA0KRUkxYEYsVC4SuDvchxCv3p8fBgCGqTKkg15
+      opZwGbKpcq2JxsLjaHNvwVwVIQonPiWfIvXAMwIDAQABAoIBAQCNrZzXXu0A3um5
+      jxQVhFANjk0IlzZp6h3hwE+pn9oFLwS+EzXlSsiLVYzVNRLAqfilLXJeowWHepxs
+      EN7ZwB1X1LC50AmRs32W02Yqregs1u9fS98QSvcrrLXrxuMGpUXqSxTLzX1YsV+I
+      BqrVKUFgl3XYtVefo5s8nttzeI+vHNfs0wAbEvaXJuFKZlvkfVgzFsyjE8FWhHJ4
+      r2+E4/3aObLyN21bT1w+8sW+xLAsExdQpe6vnHBJs5Jl8qxuBxpYLOKNgj6nhxR1
+      Gypno/64HR2sxxikJB17arPdFe3aH/BqMo3MdSo+ekCXHFPKb5HYm9jmWThnnGol
+      vKBvozNhAoGBAO+4510alzHMzd8gFNHdhr+WG3uGtMdj3qciY6n+SJ8RAJuYD40Z
+      GmNGycFnho+KL358Q+bAlKrIEzmKALeOQ/Qn3ajPUDk+uCOb7Dak1qXX+1H0AlKn
+      nsAF5baLtcKm3Gov1KDmMBhc8S59H226iwPebsw5fJ9wr4UyNMuX3ncPAoGBANUz
+      +wLZsXiaBEZrRP4vXCY4lMsuit9py6TPVEbL7fKSOELYCwE2fpyjOFAJOVPfpJUR
+      n4MZgmpTIg5cR7Det+gHSrhg4EciK1jEvBPI0u0c3OMPLPc40SAAA8pdoDYpFrk8
+      ROmQGxfjTlrT7dOdwkZnqUHIMm3pfEnU8nzbrYSdAoGBAJOOaTtx5qcMvZweDzKu
+      /QZoyznZzOT+oEqYbGhy0Ri4Snt7ufbMAOYi6IVXyAgKsvlUXCdpWxlUViEQxSg3
+      NbTP5SzHj0XtSUMB8wAfrtAeheAIJnXiH2FrP96BWLwcIYhrMKJpjikw7HQFKJdO
+      P8t92w1yRTePETsXkE/Rh2oZAoGAcs+XMKXCaEuoWbOSZ79hREPb/L6HkmAKhioQ
+      HD/dV29eVMC6zGBoNjm/LXqKIJyiqJPg7lxiWpeCE3GmOZz2NEEY/8lLfYLtDNSE
+      47KVw5JzcOLPOCKkmzLm16cri378+at3AL/VlzuVClxuCjM+V2OjRgVlAsNlZu0B
+      2DMEchECgYAs4rHtibhtMwJ5gTeyFIoU448MM3u/G2eQEbso0WyaY46mmdMD3Acz
+      Qf1jBeTjjTwjAgQd1jniNu79qLyCaaMedIlLF0dQRQ+od4BNZqCs12cUV+mtsOLw
+      vEfg8QcSTXlVLHZ8lNgVrSbvSpmsb5BDkuEM6SimvKK/Wfx8U2AJwg==
+      -----END RSA PRIVATE KEY-----
+
+vagrant:
+  box: coreos-alpha
+  cpu_count: 2
+  ram: 2048
+  hostname: vessel-public
+  network:
+    type: private
+    ip: 192.168.50.101
+  providers:
+    - name: virtualbox
+      min_version: 402.2.0
+      url: http://storage.core-os.net/coreos/amd64-usr/alpha/coreos_production_vagrant.json
+    - name: vmware_fusion
+      min_version: 402.2.0
+      url: http://storage.core-os.net/coreos/amd64-usr/alpha/coreos_production_vagrant_vmware_fusion.json
+  synced_folders:
+    - name: scripts
+      mount: /home/core/bin
+    - name: source
+      mount: /mnt/source
+        </pre>
+      </div>
+    </div>
+    <footer>
+      Made with <i class="glyphicon glyphicon-heart"></i> at <a href="http://aweber.com">AWeber Communications</a>
+    </footer>
+    <script src="http://use.edgefonts.net/source-sans-pro.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-1759093-18', 'auto');
+  ga('send', 'pageview');
+  </script>
+  </body>
+</html>
