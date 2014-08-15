@@ -103,7 +103,12 @@
         <h4>Working in your Virtual Environment</h4>
         <p>The behavior of each application or service in the virtual environment will differ based upon how the docker container is structured. By default, the goal is to have the selected services up and running in the environment. If you navigate to the <em>Overview</em> tab you can see the containers that are running and the ports they are exposing to your local operating system.</p>
 
+        <img src="img/Screenshots/Guide/9-overview.png" alt="VM Overview" class="img-responsive">
+
         <p>For example, if you wanted to test the Grafana service running in the Virtual Environment, we could point our web browser to <kbd>http://192.168.50.101:9202</kbd>.</p>
+
+        <img src="img/Screenshots/Guide/10-grafana.png" alt="Containerized Grafana" class="img-responsive">
+
         <p>Each container that a service is running in has its IP address listed in the over tab so that you can SSH directly into the container if required. To do so, you must first SSH into the Virtual Machine using the vagrant ssh command in the environment directory:</p>
         <p><samp>
           s826:Grafana gavinr$ vagrant ssh<br>
